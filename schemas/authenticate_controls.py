@@ -3,8 +3,7 @@ from typing import Union
 
 from pydantic import BaseModel
 from pydantic import model_validator
-from pydantic.v1 import root_validator
-
+from typing import ClassVar, Literal, Union
 
 class ContentLoginSchema(BaseModel):
     username: str
@@ -20,7 +19,7 @@ class PayloadModelAuthenticateControls(BaseModel):
     action: Literal["login", "change_password"]
     content: Union[ContentLoginSchema, ContentChangePasswordSchema]
 
-    ACTION_TO_CONTENT_MODEL = {
+    ACTION_TO_CONTENT_MODEL: ClassVar[dict[str, type]] = {
         "login": ContentLoginSchema,
         "change_password": ContentChangePasswordSchema,
     }
@@ -60,7 +59,7 @@ class RequestSchema(BaseModel):
     ]
     payload: Union[PayloadModelAuthenticateControls, ProfileControlsPayload]
 
-    COMMAND_TO_PAYLOAD_MODEL = {
+    COMMAND_TO_PAYLOAD_MODEL: ClassVar[dict[str, type]] = {
         "authenticate_controls": PayloadModelAuthenticateControls,
         "profile_controls": ProfileControlsPayload,
     }
@@ -86,7 +85,7 @@ if __name__ == "__main__":
     q1 = {
         "command": "authenticate_controls",
         "payload": {
-            "action": "change_password",
+            "action": "login",
             "content": {
                 "username": "admin",
                 "organization": "Acme Inc.",
@@ -96,3 +95,4 @@ if __name__ == "__main__":
     }
 
     request = RequestSchema(**q1)
+    print(request)
