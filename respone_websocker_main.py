@@ -30,7 +30,7 @@ class ResponseWebSocket:
             "command": "message_controls",
             "message": message,
             "status": StatusCode.SUCCESS.value,
-            "data": data
+            "data": data,
         }
         ResponseSchema.model_validate(response_body)
         return json.dumps(response_body)
@@ -41,7 +41,7 @@ class ResponseWebSocket:
             "command": "message_controls",
             "message": message,
             "status": StatusCode.ERROR.value,
-            "data": data
+            "data": data,
         }
         ResponseSchema.model_validate(response_body)
         return json.dumps(response_body)
@@ -52,7 +52,7 @@ class ResponseWebSocket:
             "command": "message_controls",
             "message": message,
             "status": StatusCode.WARNING.value,
-            "data": data
+            "data": data,
         }
         ResponseSchema.model_validate(response_body)
         return json.dumps(response_body)
@@ -63,7 +63,7 @@ class ResponseWebSocket:
             "command": "message_controls",
             "message": message,
             "status": StatusCode.INFO.value,
-            "data": data
+            "data": data,
         }
         ResponseSchema.model_validate(response_body)
         return json.dumps(response_body)

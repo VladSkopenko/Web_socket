@@ -6,11 +6,12 @@ q3 = {
     "command": "authenticate_controls",
     "payload": {
         "action": "change_password" or "login",
-        "content": {"username": "admin",
-                    "organization": "Acme Inc.",
-                    "user_id": 789,
-                    "password": "secret",
-                    }
+        "content": {
+            "username": "admin",
+            "organization": "Acme Inc.",
+            "user_id": 789,
+            "password": "secret",
+        },
     },
 }
 
@@ -27,7 +28,12 @@ class PayloadModel(BaseModel):
 
 
 class CommandSchema(BaseModel):
-    command: Literal["authenticate_controls", "profile_controls", "robot_controls", "message_controls"]
+    command: Literal[
+        "authenticate_controls",
+        "profile_controls",
+        "robot_controls",
+        "message_controls",
+    ]
 
 
 class RequestSchema(BaseModel):
@@ -43,8 +49,8 @@ class RequestWebSocket:
             "command": command,
             "payload": {
                 "action": action,
-                "content": {"user_id": user_id, "settings": settings, "schedule": None}
-            }
+                "content": {"user_id": user_id, "settings": settings, "schedule": None},
+            },
         }
         RequestSchema.model_validate(requests_body)
         return requests_body

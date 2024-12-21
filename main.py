@@ -55,7 +55,7 @@ class CommandHandlerFactory:
         "profile_controls": UpdateDataHandler,
         "robot_controls": ExecuteRobotHandler,
         "authenticate_controls": AuthenticateHandler,
-        "message_controls": MessageHandler
+        "message_controls": MessageHandler,
     }
 
     @classmethod
