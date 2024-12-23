@@ -44,13 +44,10 @@ class RequestSchema(BaseModel):
 class RequestWebSocket:
 
     @staticmethod
-    def generate_request_data(command, action, user_id, settings=None, schedule=None):
+    def generate_request_data(command, payload):
         requests_body = {
             "command": command,
-            "payload": {
-                "action": action,
-                "content": {"user_id": user_id, "settings": settings, "schedule": None},
-            },
+            "payload": payload,
         }
         RequestSchema.model_validate(requests_body)
         return requests_body
