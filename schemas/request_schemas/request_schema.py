@@ -29,9 +29,6 @@ class RequestSchema(BaseModel):
         command = values.get("command")
         payload = values.get("payload")
 
-        if not isinstance(payload, dict):
-            raise ValueError("Payload must be a dictionary.")
-
         payload_model = cls.COMMAND_TO_PAYLOAD_MODEL.get(command)
         if payload_model is None:
             raise ValueError(f"Unsupported command: {command}")
